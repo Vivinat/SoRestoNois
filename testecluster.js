@@ -11,17 +11,15 @@ async function main(){
     const client = new MongoClient(uri);
  
     try {
-        // Connect to the MongoDB cluster
         await client.connect();
- 
 
         //await  listDatabases(client);
 
         //await searchText(client, '1');
 
-        await registerUser(client, 'Flavinho', 0, '0');
+        //await registerUser(client, 'Flavinho', 0, '0');
 
-        //await loadUser(client, '641ca0f6dfb3b457e6cad75f');
+        await loadUser(client, '641ca0f6dfb3b457e6cad75f');
  
     } catch (e) {
         console.error(e);
@@ -32,6 +30,11 @@ async function main(){
 
 main().catch(console.error);
 
+
+/*
+	Lista as databases	
+*/
+
 async function listDatabases(client){
     databasesList = await client.db().admin().listDatabases();
  
@@ -39,12 +42,22 @@ async function listDatabases(client){
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 };
 
+/*
+	Registra um usuário no banco de dados	
+*/
+
+
 async function registerUser(client, newName, starterBullets, starterProgression) {
     const myColl = client.db("PlayerStats").collection("_stats");
     const doc = { name: newName, bullets: starterBullets, currentProgress: starterProgression};
     const result = await myColl.insertOne(doc);
     console.log("A document was inserted with the _id: ${result.insertedId}",);
 }
+
+/*
+	Carrega um usuário do banco de dados
+*/
+
 
 async function loadUser(client, userid){
 
@@ -59,13 +72,16 @@ async function loadUser(client, userid){
 
 }
 
+/*
+	Busca um texto no banco de dados
+*/
+
 async function searchText(client, textId) {
 
     const cursor = client.db("TextDatabase").collection("_text").find( {"_id" : textId});
 
     const results = await cursor.toArray();
 
-    // Process the results
     if (results.length > 0) {
         results.forEach((result, i) => {
             console.log(result);
