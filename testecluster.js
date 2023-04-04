@@ -58,17 +58,18 @@ async function registerUser(client, newName, starterBullets, starterProgression)
 	Carrega um usuário do banco de dados
 */
 
-
 async function loadUser(client, userid){
 
     var mongo = require('mongodb');
     var o_id = new mongo.ObjectId(userid);
 
     const finder = client.db("PlayerStats").collection("_stats").find({'_id': o_id});
- 
-    finder.toArray();
 
-    console.log(finder);
+    const results = await finder.toArray();
+
+    console.log(results);
+
+    return results;
 
 }
 
