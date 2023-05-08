@@ -1,16 +1,18 @@
 const {MongoClient, ObjectId} = require('mongodb');
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use('/public', express.static(__dirname + '/public'));
 
 async function main(){
     /**
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
-     * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
+     * http://localhost:3000/public/sandbox.html
      */
-    const uri = "mongodb+srv://venat:FaZL1BJvmbyHszKP@sorestonoiscluster.urpzo2g.mongodb.net/?retryWrites=true&w=majority";
+    const uri = "mongodb+srv://venat:bAsEwW6b3gDP86j8@sorestonoiscluster.urpzo2g.mongodb.net/?retryWrites=true&w=majority";
 
  
     const client = new MongoClient(uri, { useUnifiedTopology: true });
@@ -26,9 +28,10 @@ async function main(){
             const progression = 'N1A';
             
             try {
-                const result = await client.db("PlayerStats").collection("_stats").insertOne({ name, bullets, progression });
-                console.log(`User ${name} registered successfully.`);
-                res.sendStatus(200);
+                const result = await registerUser(client, name, bullets, progression); 
+                console.log(`User registered successfully with ID ${result}.`);
+                res.cookie('userId', result.toString());
+                res.status(302).setHeader('Location', 'http://localhost:3000/public/choices.html').end();
             } catch (error) {
                 console.error(error);
                 res.sendStatus(500);
@@ -48,21 +51,14 @@ async function main(){
 	Registra um usuário no banco de dados	
 */
 
-async function registerUser(client, newName, starterBullets, starterProgression) {
-    const myColl = client.db("PlayerStats").collection("_stats");
-    const doc = { name: newName, bullets: starterBullets, currentProgress: starterProgression};
-    const result = await myColl.insertOne(doc);
-    console.log("A document was inserted with the _id: ${result.insertedId}",);
-    return result.ops[0];
-}
-
-
 main();
 
+async function registerUser(client, newName, starterBullets, starterProgression) {
 
-
-
-
+    const result = await client.db("PlayerStats").collection("_stats").insertOne({ newName, starterBullets, starterProgression});
+    console.log(`User ${newName} registered successfully.`);
+    return result.insertedId;
+}
 
 
 async function listDatabases(client){
