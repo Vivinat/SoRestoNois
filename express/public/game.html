@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Só Resto Nois</title>
+</head>
+<body>
+
+    <div class="narration">
+        <h1>teste</h1>
+    </div>
+
+
+    <div class="choicesContainer">
+
+        <button></button>
+        <button></button>
+        <button></button>
+        <button></button>
+
+    </div>
+
+    <script>
+        window.addEventListener('load', async () => {
+          const response = await fetch('/text');
+          if (response.ok) {
+            const data = await response.json();
+            const text = data.text;
+            const narration = document.querySelector('.narration');
+            narration.innerHTML = `<h1>${text}</h1>`;
+          } else {
+            console.error(`Failed to fetch text: ${response.status} ${response.statusText}`);
+          }
+        });
+    </script>
+
+  <script src="choices.js"></script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 const form = document.querySelector('#register-form');
 const nameInput = document.querySelector('#name-input');
+const logButton = document.getElementById('LogButton');
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
