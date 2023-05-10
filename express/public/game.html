@@ -30,12 +30,28 @@
             const text = data.text;
             const narration = document.querySelector('.narration');
             narration.innerHTML = `<h1>${text}</h1>`;
+
+            // Populate choice buttons
+            const choiceTextResponse = await fetch('/choiceText');
+            if (choiceTextResponse.ok) {
+              const choiceTextData = await choiceTextResponse.json();
+              const choiceText = choiceTextData.choiceText;
+              const choiceButtons = document.querySelectorAll('.choicesContainer button');
+              for (let i = 0; i < choiceButtons.length && i < choiceButtons.length; i++) {
+                choiceButtons[i].textContent = choiceText[i];
+              }
+              // Hide any unused buttons
+              for (let i = choiceText.length; i < choiceButtons.length; i++) {
+                choiceButtons[i].style.display = 'none';
+              }
+            } else {
+              console.error(`Failed to fetch choice text: ${choiceTextResponse.status} ${choiceTextResponse.statusText}`);
+            }
           } else {
             console.error(`Failed to fetch text: ${response.status} ${response.statusText}`);
           }
         });
     </script>
 
-  <script src="choices.js"></script>
 </body>
 </html>

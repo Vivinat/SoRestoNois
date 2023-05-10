@@ -15,7 +15,7 @@ async function main(){
      * http://localhost:3000/public/register.html
      * RAIZ: http://localhost:3000/
      */
-    const uri = "mongodb+srv://venat:bAsEwW6b3gDP86j8@sorestonoiscluster.urpzo2g.mongodb.net/?retryWrites=true&w=majority";
+    const uri = "mongodb+srv://venat:N5qgMr2pkgT2HxMI@sorestonoiscluster.urpzo2g.mongodb.net/?retryWrites=true&w=majority";
 
  
     const client = new MongoClient(uri, { useUnifiedTopology: true });
@@ -93,13 +93,48 @@ async function main(){
               console.log(user.starterProgression);
               const textId = user.starterProgression;
               const text = await client.db('TextDatabase').collection('_text').findOne({ _id: textId });
+              console.log(text);
               if (!text) {
                 console.error(`Text with ID ${textId} not found.`);
                 res.sendStatus(404);
                 return;
               }
-          
               res.json({ text: text.text });
+            } catch (error) {
+              console.error(error);
+              res.sendStatus(500);
+            }
+          });
+
+          app.get('/choiceText', async (req, res) => {
+            const userId = req.cookies.userId;
+            if (!userId) {
+              res.sendStatus(401);
+              return;
+            }
+          
+            try {
+              const user = await findUser(client, userId);
+              if (!user) {
+                res.sendStatus(401);
+                return;
+              }
+              console.log(user.starterProgression);
+              const textId = user.starterProgression;
+              const text = await client.db('TextDatabase').collection('_text').findOne({ _id: textId });
+              const choicesId = text.choices;
+              const choiceText = [];
+              for (let i = 0; i < choicesId.length; i++) {
+                const choice = await client.db('TextDatabase').collection('_choices').findOne({ _id: choicesId[i] });
+                choiceText.push(choice.content);
+              }
+              console.log(text);
+              if (!text) {
+                console.error(`Text with ID ${textId} not found.`);
+                res.sendStatus(404);
+                return;
+              }
+              res.json({ choiceText });
             } catch (error) {
               console.error(error);
               res.sendStatus(500);
