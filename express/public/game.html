@@ -15,10 +15,11 @@
 
     <div class="choicesContainer">
 
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
+      <button id="choice1" choice-id=""></button>
+      <button id="choice2" choice-id=""></button>
+      <button id="choice3" choice-id=""></button>
+      <button id="choice4" choice-id=""></button>
+  
 
     </div>
 
@@ -31,19 +32,29 @@
             const narration = document.querySelector('.narration');
             narration.innerHTML = `<h1>${text}</h1>`;
 
-            // Populate choice buttons
-            const choiceTextResponse = await fetch('/choiceText');
-            if (choiceTextResponse.ok) {
-              const choiceTextData = await choiceTextResponse.json();
-              const choiceText = choiceTextData.choiceText;
-              const choiceButtons = document.querySelectorAll('.choicesContainer button');
-              for (let i = 0; i < choiceButtons.length && i < choiceButtons.length; i++) {
-                choiceButtons[i].textContent = choiceText[i];
-              }
-              // Hide any unused buttons
-              for (let i = choiceText.length; i < choiceButtons.length; i++) {
-                choiceButtons[i].style.display = 'none';
-              }
+          // Populate choice buttons
+          const choiceTextResponse = await fetch('/choiceText');
+
+
+          choiceIdsResponse = await fetch('/choiceIds');
+          const choiceIdsData = await choiceIdsResponse.json();
+          const choiceIds = choiceIdsData.choicesId;
+          console.log(choiceIds);
+
+          if (choiceTextResponse.ok) {
+            const choiceTextData = await choiceTextResponse.json();
+            const choiceText = choiceTextData.choiceText;
+            const choiceButtons = document.querySelectorAll('.choicesContainer button');
+            for (let i = 0; i < choiceButtons.length && i < choiceButtons.length; i++) {
+              choiceButtons[i].textContent = choiceText[i];
+              choiceButtons[i].setAttribute('choice-id', choiceIds[i]);
+            }
+
+              
+            // Hide any unused buttons
+            for (let i = choiceText.length; i < choiceButtons.length; i++) {
+              choiceButtons[i].style.display = 'none';
+            }
             } else {
               console.error(`Failed to fetch choice text: ${choiceTextResponse.status} ${choiceTextResponse.statusText}`);
             }
@@ -51,6 +62,19 @@
             console.error(`Failed to fetch text: ${response.status} ${response.statusText}`);
           }
         });
+
+        async function sendChoice(choiceId) {
+        const response = await fetch('/makeChoice', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ choiceId })
+        });
+        if (!response.ok) {
+            console.error(`Failed to send choice: ${response.status} ${response.statusText}`);
+        }
+    }
     </script>
 
 </body>

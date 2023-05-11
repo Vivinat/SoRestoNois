@@ -2,10 +2,13 @@ const {MongoClient} = require('mongodb');
 const express = require('express');
 const {ObjectId} = require('mongodb');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(bodyParser.json());
 app.use('/public', express.static(__dirname + '/public'));
 
 
@@ -141,6 +144,76 @@ async function main(){
             }
           });
 
+          app.get('/choiceIds', async (req, res) => {
+            const userId = req.cookies.userId;
+            if (!userId) {
+              res.sendStatus(401);
+              return;
+            }
+          
+            try {
+              const user = await findUser(client, userId);
+              if (!user) {
+                res.sendStatus(401);
+                return;
+              }
+
+              const textId = user.starterProgression;
+              const text = await client.db('TextDatabase').collection('_text').findOne({ _id: textId });
+              const choicesId = text.choices;
+              console.log(choicesId);
+              if (!text) {
+                console.error(`ID ${textId} not found.`);
+                res.sendStatus(404);
+                return;
+              }
+              res.json({ choicesId });
+
+            } catch (error) {
+              console.error(error);
+              res.sendStatus(500);
+            }
+            });
+
+
+          app.get('/makeChoice', async (req, res) => {
+            const userId = req.cookies.userId;
+            if (!userId) {
+              res.sendStatus(401);
+              return;
+            }
+            try {
+              const user = await findUser(client, userId);
+              if (!user) {
+                res.sendStatus(401);
+                return;
+              }
+
+              const choiceId = req.body.choiceId;
+
+              // Find the choice in the database
+              const choice = await client.db('TextDatabase').collection('_choices').findOne({ _id: choiceId });
+              if (!choice) {
+                res.sendStatus(404);
+                return;
+              }
+            
+              // Update the user's starterProgression
+              const filter = { _id: userId };
+              const update = { $set: { starterProgression: choice.nextNarration } };
+              const result = await client.db('TextDatabase').collection('_stats').updateOne(filter, update);
+              if (result.modifiedCount === 0) {
+                console.error(`Failed to update user ${userId}`);
+                res.sendStatus(500);
+                return;
+              }
+            
+              res.sendStatus(200);
+              } catch (error) {
+                console.error(error);
+                res.sendStatus(500);
+              }
+            });
 
         app.listen(3000, () => {
             console.log('Server started at port 3000');
@@ -167,3 +240,11 @@ async function registerUser(client, newName, starterBullets, starterProgression)
 async function findUser(client, userId) {
     return client.db("PlayerStats").collection("_stats").findOne({ _id: new ObjectId(userId) });
 }
+
+function getCookie(req, name) {
+  if (req.cookies) {
+    return req.cookies[name];
+  }
+  return null;
+}
+
