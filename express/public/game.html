@@ -48,6 +48,9 @@
             for (let i = 0; i < choiceButtons.length && i < choiceButtons.length; i++) {
               choiceButtons[i].textContent = choiceText[i];
               choiceButtons[i].setAttribute('choice-id', choiceIds[i]);
+              choiceButtons[i].addEventListener('click', function() {
+                sendChoice(choiceButtons[i].getAttribute('choice-id'));
+              });
             }
 
               
@@ -64,6 +67,9 @@
         });
 
         async function sendChoice(choiceId) {
+          console.log("Escolha selecionada abaixo:")
+          console.log(choiceId);
+
         const response = await fetch('/makeChoice', {
             method: 'POST',
             headers: {
@@ -73,7 +79,7 @@
         });
         if (!response.ok) {
             console.error(`Failed to send choice: ${response.status} ${response.statusText}`);
-        }
+        } 
     }
     </script>
 

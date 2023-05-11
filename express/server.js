@@ -176,7 +176,7 @@ async function main(){
             });
 
 
-          app.get('/makeChoice', async (req, res) => {
+          app.post('/makeChoice', async (req, res) => {
             const userId = req.cookies.userId;
             if (!userId) {
               res.sendStatus(401);
@@ -192,22 +192,26 @@ async function main(){
               const choiceId = req.body.choiceId;
 
               // Find the choice in the database
+              console.log('esta é a choice')
               const choice = await client.db('TextDatabase').collection('_choices').findOne({ _id: choiceId });
+              console.log('depois')
+
               if (!choice) {
                 res.sendStatus(404);
                 return;
               }
             
               // Update the user's starterProgression
-              const filter = { _id: userId };
-              const update = { $set: { starterProgression: choice.nextNarration } };
-              const result = await client.db('TextDatabase').collection('_stats').updateOne(filter, update);
+              const filter = { _id: new ObjectId(userId)};
+              console.log(choice.next_narration);
+              const update = { $set: { starterProgression: choice.next_narration } };
+              const result = await client.db("PlayerStats").collection("_stats").updateOne(filter, update);
               if (result.modifiedCount === 0) {
                 console.error(`Failed to update user ${userId}`);
                 res.sendStatus(500);
                 return;
               }
-            
+              console.log(`User progression updated to ${choice.next_narration}`);
               res.sendStatus(200);
               } catch (error) {
                 console.error(error);
