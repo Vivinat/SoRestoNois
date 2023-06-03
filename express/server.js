@@ -11,6 +11,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use('/public', express.static(__dirname + '/public'));
 
+const uri = "mongodb+srv://venat:N5qgMr2pkgT2HxMI@sorestonoiscluster.urpzo2g.mongodb.net/?retryWrites=true&w=majority";
 
 async function main(){
     /**
@@ -18,8 +19,6 @@ async function main(){
      * http://localhost:3000/public/register.html
      * RAIZ: http://localhost:3000/
      */
-    const uri = "mongodb+srv://venat:N5qgMr2pkgT2HxMI@sorestonoiscluster.urpzo2g.mongodb.net/?retryWrites=true&w=majority";
-
  
     const client = new MongoClient(uri, { useUnifiedTopology: true });
 
@@ -176,6 +175,29 @@ async function main(){
             });
 
 
+          app.get('/consultaBullets', async (req, res) => {
+            const userId = req.cookies.userId;
+            if (!userId) {
+              res.sendStatus(401);
+              return;
+            }
+          
+            try {
+              const user = await findUser(client, userId);
+              if (!user) {
+                res.sendStatus(401);
+                return;
+              }
+              const currentBullets = user.starterBullets;
+              console.log(`O usuário tem ${currentBullets} balas`)
+              res.json({ currentBullets });
+            } catch (error) {
+              console.error(error);
+              res.sendStatus(500);
+            }
+          });
+
+
           app.post('/makeChoice', async (req, res) => {
             const userId = req.cookies.userId;
             if (!userId) {
@@ -192,7 +214,6 @@ async function main(){
               const choiceId = req.body.choiceId;
 
               // Find the choice in the database
-              console.log('esta é a choice')
               const choice = await client.db('TextDatabase').collection('_choices').findOne({ _id: choiceId });
               console.log('depois')
 
