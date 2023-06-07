@@ -217,12 +217,20 @@ async function main(){
               const choice = await client.db('TextDatabase').collection('_choices').findOne({ _id: choiceId });
               console.log('depois')
 
-              let canShoot = checkAndUpdateBullets(client, userId, 2)
-              if (canShoot == 0)
+              console.log("Verificando se escolha tem custo de balas");
+
+              if (choice.use_bullets == true)
               {
-                return;
-                //CRIAR TELA DE MORTE E SUBSTITUIR CHOICE.NEXT_NARRATION POR ELA
-                //LEVAR PLAYER PRA ESSA TELA E BYE BYE
+                  console.log("Uso de balas detectado");
+                  let bullets = parseInt(choice.bullets_used);
+                  const canShoot = { value: true };
+                  await checkAndUpdateBullets(client, userId, bullets, canShoot);
+                  console.log(canShoot.value);
+                  if (canShoot.value == false)
+                  {
+                    console.log("MORREU!")
+                    choice.next_narration = "DEATH";
+                  }
               }
               
               if (!choice) {
@@ -274,14 +282,16 @@ async function findUser(client, userId) {
     return client.db("PlayerStats").collection("_stats").findOne({ _id: new ObjectId(userId) });
 }
 
-async function checkAndUpdateBullets(client, userId, bullets)
+async function checkAndUpdateBullets(client, userId, bullets, canShoot)
 {
+    //QUER ADICIONAR BALAS? PASSE BULLETS COMO NEGATIVO
+    //QUER TIRAR BALAS? PASSE COMO POSITIVO
     const user = await findUser(client, userId);
     user.starterBullets = user.starterBullets - bullets;
     console.log(`Serão removidas ${bullets} balas do jogador`);
     if (user.starterBullets < 0){
       console.log("Não há balas suficientes!")
-      return 0;
+      canShoot.value = false;
     }
     try{
     const filter = { _id: new ObjectId(userId)};
