@@ -64,6 +64,7 @@
           } else {
             console.error(`Failed to fetch text: ${response.status} ${response.statusText}`);
           }
+          updateBullets();
         });
 
         async function sendChoice(choiceId) {
@@ -110,9 +111,10 @@
           } else {
             console.error(`Failed to fetch narration text or choice data.`);
           }
+          updateBullets();
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        function updateBullets() {
           fetch('/consultaBullets')
             .then(function(response) {
               if (!response.ok) {
@@ -127,7 +129,7 @@
             .catch(function(error) {
               console.error(error);
             });
-        });
+        };
     </script>
 
 </body>

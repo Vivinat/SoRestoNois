@@ -217,6 +217,14 @@ async function main(){
               const choice = await client.db('TextDatabase').collection('_choices').findOne({ _id: choiceId });
               console.log('depois')
 
+              let canShoot = checkAndUpdateBullets(client, userId, 2)
+              if (canShoot == 0)
+              {
+                return;
+                //CRIAR TELA DE MORTE E SUBSTITUIR CHOICE.NEXT_NARRATION POR ELA
+                //LEVAR PLAYER PRA ESSA TELA E BYE BYE
+              }
+              
               if (!choice) {
                 res.sendStatus(404);
                 return;
@@ -264,6 +272,33 @@ async function registerUser(client, newName, starterBullets, starterProgression)
 
 async function findUser(client, userId) {
     return client.db("PlayerStats").collection("_stats").findOne({ _id: new ObjectId(userId) });
+}
+
+async function checkAndUpdateBullets(client, userId, bullets)
+{
+    const user = await findUser(client, userId);
+    user.starterBullets = user.starterBullets - bullets;
+    console.log(`Serão removidas ${bullets} balas do jogador`);
+    if (user.starterBullets < 0){
+      console.log("Não há balas suficientes!")
+      return 0;
+    }
+    try{
+    const filter = { _id: new ObjectId(userId)};
+    console.log(`Quantidade de balas atualizado: ${user.starterBullets}`);
+    const update = { $set: { starterBullets: user.starterBullets } };
+    const result = await client.db("PlayerStats").collection("_stats").updateOne(filter, update);
+    if (result.modifiedCount === 0) {
+      console.error(`Failed to update user ${userId}`);
+      res.sendStatus(500);
+      return -1;
+    }
+    console.log(`User bullets updated`);
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500);
+    }
+
 }
 
 function getCookie(req, name) {
