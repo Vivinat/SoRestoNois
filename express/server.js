@@ -96,11 +96,21 @@ async function main(){
               const textId = user.starterProgression;
               const text = await client.db('TextDatabase').collection('_text').findOne({ _id: textId });
               console.log(text);
+
               if (!text) {
                 console.error(`Text with ID ${textId} not found.`);
                 res.sendStatus(404);
                 return;
               }
+
+              const placeholder = "@";
+              const regex = new RegExp(placeholder, "g");
+              console.log(text.text);
+              if (regex.test(text.text)) {
+                console.log("Fazendo mudança de nome");
+                text.text = text.text.replace(regex, user.newName);
+              }
+
               res.json({ text: text.text });
             } catch (error) {
               console.error(error);
