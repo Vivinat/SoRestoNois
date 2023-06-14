@@ -4,11 +4,12 @@ const logButton = document.getElementById('LogButton');
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+    //Aqui verifica o forms de registro.
     const name = nameInput.value;
     const bullets = 0;
     const progression = 'N1A';
 
+    //Usuario se registrou. Mande para server.js fazer a conexão
     const response = await fetch('/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
