@@ -9,13 +9,13 @@
 <body>
 
     <div class="narration">
-        <h1>teste</h1>
+        <h1>Conexão do servidor Inativa. Sem narração para mostrar</h1>
     </div>
 
 
     <div class="choicesContainer">
 
-      <button id="choice1" choice-id=""></button>
+      <button id="choice1" choice-id=""></button>   <!-- choice-id recebe a Id da escolha atrelada a ele, em tempo de execução -->
       <button id="choice2" choice-id=""></button>
       <button id="choice3" choice-id=""></button>
       <button id="choice4" choice-id=""></button>
@@ -27,15 +27,15 @@
     </div>
 
     <script>
-        window.addEventListener('load', async () => {
-          const response = await fetch('/text');
+        window.addEventListener('load', async () => { //Sempre que houve carregamento, isso acontece:
+          const response = await fetch('/text');    //Cate a narração
           if (response.ok) {
             const data = await response.json();
             const text = data.text;
             const narration = document.querySelector('.narration');
-            narration.innerHTML = `<h1>${text}</h1>`;
+            narration.innerHTML = `<h1>${text}</h1>`;   //Substitua pela narração obtida
 
-            // Populate choice buttons
+            // Popule os botões de escolhas com textos e Ids
             const choiceTextResponse = await fetch('/choiceText');
             const choiceIdsResponse = await fetch('/choiceIds');
 
@@ -54,7 +54,7 @@
                 });
               }
 
-              // Hide any unused buttons
+              // Esconda botões não usados
               for (let i = choiceText.length; i < choiceButtons.length; i++) {
                 choiceButtons[i].style.display = 'none';
               }
@@ -67,6 +67,7 @@
           updateBullets();
         });
 
+        //Cliquei num botão
         async function sendChoice(choiceId) {
           console.log("Escolha selecionada abaixo:")
           console.log(choiceId);
@@ -82,6 +83,8 @@
           if (!response.ok) {
             console.error(`Failed to send choice: ${response.status} ${response.statusText}`);
           }
+
+          //Fiz uma escolha. Quero ir para a proxima narração, que terá suas proprias escolhas
 
           const narrationResponse = await fetch('/text');
           const choiceTextResponse = await fetch('/choiceText');
@@ -114,7 +117,7 @@
           updateBullets();
         }
 
-        function updateBullets() {
+        function updateBullets() {    //Quantas balas eu tenho?
           fetch('/consultaBullets')
             .then(function(response) {
               if (!response.ok) {
