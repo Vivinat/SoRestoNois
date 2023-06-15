@@ -1,0 +1,9 @@
+div{
+    display: flex;
+}
+section{
+    border-style: solid;
+    border: solid white 1px;
+    border-radius: 8px;
+}
+
