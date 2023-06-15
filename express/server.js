@@ -53,14 +53,25 @@ async function main(){
                     <html>
                     <head>
                       <title>Bem-vindo, ${user.newName}!</title>
-                      <link rel="stylesheet" href="/public/style.css">
+                      <link rel="stylesheet" href="/public/style_register.css">
                     </head>
                     <body>
                       <h1>Bem-vindo, ${user.newName}!</h1>
                       <p>Progresso: ${user.starterProgression}</p>
                       <p>Balas: ${user.starterBullets}</p>
-                      <button id="LogButton"><a href="/public/game.html">Continuar</a></button>
-                      <button id="NewGameButton"><a href="/public/register.html">Novo Jogo</a></button>
+                      <div class"card-grid">
+                        <a class="card" id="LogButton" href="/public/game.html">
+                        <div class="card_background" style="background-image: url(https://th.bing.com/th/id/OIG.5.g33uZBDYO4GlissDWY?pid=ImgGn)"></div>
+                        <div class="card__content">
+                          <h3 class="card__heading">Continuar</h3>
+                        </div>
+                      </a>
+                      <a class="card" id="NewGameButton" href="/public/register.html">
+                        <div class="card_background" style="background-image: url(https://th.bing.com/th/id/OIG.ZC2UKESEk4WKqD4JqCT5?pid=ImgGn)"></div>
+                        <div class="card__content">
+                          <h3 class="card__heading">Novo Jogo</h3>
+                        </div>
+                      </a>
                     </body>
                     </html>
                     `);
