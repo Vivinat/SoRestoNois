@@ -8,6 +8,10 @@
   --spacing-xl: 32px;
   --spacing-xxl: 64px;
   --width-container: 1200px;
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 *{
@@ -27,9 +31,14 @@ body{
   height: 100%;
 }
 
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
 .hero-section{
   align-items: flex-start;
-  background-image: linear-gradient(15deg, #045a39 0%, #2a6973 150%);
+  background-image: linear-gradient(15deg, #002215 0%, #16363b 150%);
   display: flex;
   min-height: 100%;
   justify-content: center;

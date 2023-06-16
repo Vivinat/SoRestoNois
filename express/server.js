@@ -56,6 +56,7 @@ async function main(){
                       <link rel="stylesheet" href="/public/style_start.css">
                     </head>
                     <body>
+                      <h1>Só Resto Nois</h1>
                       <h1>Bem-vindo, ${user.newName}!</h1>
                       <p>Progresso: ${user.starterProgression}</p>
                       <p>Balas: ${user.starterBullets}</p>
