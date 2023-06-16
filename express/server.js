@@ -53,25 +53,30 @@ async function main(){
                     <html>
                     <head>
                       <title>Bem-vindo, ${user.newName}!</title>
-                      <link rel="stylesheet" href="/public/style_register.css">
+                      <link rel="stylesheet" href="/public/style_start.css">
                     </head>
                     <body>
                       <h1>Bem-vindo, ${user.newName}!</h1>
                       <p>Progresso: ${user.starterProgression}</p>
                       <p>Balas: ${user.starterBullets}</p>
-                      <div class"card-grid">
-                        <a class="card" id="LogButton" href="/public/game.html">
-                        <div class="card_background" style="background-image: url(https://th.bing.com/th/id/OIG.5.g33uZBDYO4GlissDWY?pid=ImgGn)"></div>
-                        <div class="card__content">
-                          <h3 class="card__heading">Continuar</h3>
-                        </div>
-                      </a>
-                      <a class="card" id="NewGameButton" href="/public/register.html">
-                        <div class="card_background" style="background-image: url(https://th.bing.com/th/id/OIG.ZC2UKESEk4WKqD4JqCT5?pid=ImgGn)"></div>
-                        <div class="card__content">
-                          <h3 class="card__heading">Novo Jogo</h3>
-                        </div>
-                      </a>
+                      <section class="hero-section">
+                        <div class="card-grid">
+                          <a id="LogButton" class="card" href="/public/game.html">
+                            <div class="card__background" style="background-image: url(https://th.bing.com/th/id/OIG.5.g33uZBDYO4GlissDWY?pid=ImgGn)"></div>
+                            <div class="card__content">
+                              <p class="card__category"></p>
+                              <h3 class="card__heading">Continuar</h3>
+                            </div>
+                          </a>
+                          <a id="NewGameButton" class="card" href="/public/register.html">
+                            <div class="card__background" style="background-image: url(https://th.bing.com/th/id/OIG.ZC2UKESEk4WKqD4JqCT5?pid=ImgGn)"></div>
+                            <div class="card__content">
+                              <p class="card__category"></p>
+                              <h3 class="card__heading">Novo Jogo</h3>
+                            </div>
+                          </a>
+                        <div>
+                      </section>
                     </body>
                     </html>
                     `);
