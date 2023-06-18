@@ -23,8 +23,12 @@
     </div>
 
     <div class="bulletsCounter">
-      <p>Número de balas:<span id="UserBullets"></span></p>
+      <p>Número de balas: <span id="UserBullets"></span></p>
     </div>
+    <div class="healthCounter">
+      <p>Saúde: <span id="UserHealth"></span></p>
+    </div>
+    
 
     <script>
         window.addEventListener('load', async () => { //Sempre que houve carregamento, isso acontece:
@@ -65,6 +69,7 @@
             console.error(`Failed to fetch text: ${response.status} ${response.statusText}`);
           }
           updateBullets();
+          updateHealth();
         });
 
         //Cliquei num botão
@@ -115,10 +120,11 @@
             console.error(`Failed to fetch narration text or choice data.`);
           }
           updateBullets();
+          updateHealth();
         }
 
         function updateBullets() {    //Quantas balas eu tenho?
-          fetch('/consultaBullets')
+          fetch('/updateBullets')
             .then(function(response) {
               if (!response.ok) {
                 throw new Error('Ocorreu um erro ao consultar o banco de dados.');
@@ -128,6 +134,23 @@
             .then(function(data) {
               var atributo = parseInt(data.currentBullets); // O valor retornado é uma string
               document.getElementById('UserBullets').textContent = atributo; // Atualiza o conteúdo do elemento com o atributo
+            })
+            .catch(function(error) {
+              console.error(error);
+            });
+        };
+
+        function updateHealth(){
+          fetch('/updateHealth')
+            .then(function(response) {
+              if (!response.ok) {
+                throw new Error('Ocorreu um erro ao consultar o banco de dados.');
+              }
+              return response.json();
+            })
+            .then(function(data) {
+              var atributo = parseInt(data.currentHealth); // O valor retornado é uma string
+              document.getElementById('UserHealth').textContent = atributo; // Atualiza o conteúdo do elemento com o atributo
             })
             .catch(function(error) {
               console.error(error);
