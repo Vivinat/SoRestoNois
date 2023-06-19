@@ -76,6 +76,7 @@ async function main(){
                       <button id="NewGameButton"><a href="#" onclick="resetUser()">Novo Jogo</a></button>
                       <hr>
                       <p>Conquistas</p>
+                      <p>${user.achievements.length} de 30</p>
                       <ul>
                         ${achievementsList} <!-- Insira a lista de conquistas aqui -->
                       </ul>
