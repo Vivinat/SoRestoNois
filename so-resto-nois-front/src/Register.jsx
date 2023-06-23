@@ -1,3 +1,10 @@
+import { DevTool } from '@hookform/devtools';
+import {useForm} from 'react-hook-form';
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import axios, * as others from 'axios';
+import { useState } from 'react';
+
 export default function Register(){
     
     const form = document.querySelector('#register-form');
@@ -34,6 +41,16 @@ export default function Register(){
         </label>
         <button type="submit">Enviar</button>
         </form>
+
+        <form onSubmit={handleSubmit(submit)} noValidate>
+                <label htmlFor="username" placeholder="usuário">Usuário</label>
+                <input type="text" id="username" {...register('username')} />
+                <p className='erro'>{errors.username?.message}</p>
+
+                <button>Submeter</button>
+            </form>
+            <DevTool control={control}/>
+            <p>{msg}</p>
 
 
         <footer><p>Utilizamos cookies para facilitar o armazenamento!</p></footer>
