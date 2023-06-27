@@ -35,16 +35,9 @@ export default function Register(){
         <>
         <h1>Cadastro de usuário</h1>
 
-        <form action="/register" method="POST">
-        <label> Nome:
-            <input type="text" name="name" id="name-input"/>
-        </label>
-        <button type="submit">Enviar</button>
-        </form>
-
-        <form onSubmit={handleSubmit(submit)} noValidate>
-                <label htmlFor="username" placeholder="usuário">Usuário</label>
-                <input type="text" id="username" {...register('username')} />
+        <form action="/register" method="POST" onSubmit={handleSubmit(submit)} noValidate>
+                <label htmlFor="username" placeholder="nome">Nome</label>
+                <input type="text" id="name" {...register('username')} />
                 <p className='erro'>{errors.username?.message}</p>
 
                 <button>Submeter</button>
