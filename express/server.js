@@ -71,7 +71,6 @@ async function main(){
                       <h1>Bem-vindo, ${user.newName}!</h1>
                       <p>Progresso: ${user.starterProgression}</p>
                       <p>Balas: ${user.starterBullets}</p>
-<<<<<<< HEAD
                       <section class="hero-section">
                         <div class="card-grid">
                           <a id="LogButton" class="card" href="/public/game.html">
