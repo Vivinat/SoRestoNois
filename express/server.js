@@ -514,4 +514,3 @@ function getCookie(req, name) {   //TALVEZ NÃO PRECISEMOS DISTO.
   }
   return null;
 }
-
