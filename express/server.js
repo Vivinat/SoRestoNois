@@ -85,23 +85,26 @@ async function main(){
                             <div class="card__background" style="background-image: url(https://th.bing.com/th/id/OIG.ZC2UKESEk4WKqD4JqCT5?pid=ImgGn)"></div>
                             <div class="card__content">
                               <p class="card__category"></p>
+                              <h3 class="card__heading">Nova Conta</h3>
+                            </div>
+                          </a>
+                          <a id="NewGameButton" class="card" href="#" onclick="resetUser()">
+                            <div class="card__background" style="background-image: url(https://th.bing.com/th/id/OIG.ZC2UKESEk4WKqD4JqCT5?pid=ImgGn)"></div>
+                            <div class="card__content">
+                              <p class="card__category"></p>
                               <h3 class="card__heading">Novo Jogo</h3>
                             </div>
                           </a>
-                        <div>
-                      </section>
-=======
-                      <p>Saúde: ${user.health}</p>
-                      <button id="LogButton"><a href="/public/game.html">Continuar</a></button>
-                      <button id="NewAccountButton"><a href="/public/register.html">Nova Conta</a></button>
-                      <button id="NewGameButton"><a href="#" onclick="resetUser()">Novo Jogo</a></button>
-                      <hr>
-                      <p>Conquistas</p>
-                      <p>${user.achievements.length} de 30</p>
-                      <ul>
+                          <p>Saúde: ${user.health}</p>
+                          <hr>
+                          <p>Conquistas</p>
+                          <p>${user.achievements.length} de 30</p>
+                          <ul>
                         ${achievementsList} <!-- Insira a lista de conquistas aqui -->
                       </ul>
->>>>>>> main
+                        <div>
+                      </section>
+
                     </body>
                     <script>
                           function resetUser() {
