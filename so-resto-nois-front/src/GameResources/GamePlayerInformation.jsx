@@ -1,12 +1,14 @@
+import PlayerBullets from "./PlayerBullets";
+import PlayerHealth from "./PlayerHealth";
+
 export default function GamePlayerInformation() {
-    let balas = 0;
-    
+        
     return(
         <>
             <section className="GameInformation">
-                <p>
-                    número de balas: {balas}
-                </p>
+                <PlayerBullets/>
+                <PlayerHealth/>
+                
             </section>
             
         </>
