@@ -10,11 +10,16 @@ export default function GameScreen() {
     return(
         <>
             <div>
-                <GameImage/>
-                <GameText/>
-                <GameChoices/>  
-                <GamePlayerInformation/>
-            </div>
+                
+                <div className="GameArea">
+                    <GameImage/>
+                    <GameText/>
+                    <GameChoices/>
+                </div>
+                <GamePlayerInformation/> 
+            </div>   
+                
+            
             
         </>
     )

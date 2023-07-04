@@ -1,7 +1,7 @@
 
 
 export default function GameImage() {
-    let ImageSource = 'https://i.pinimg.com/564x/8e/74/7b/8e747b415efc46260288c88fbab8392a.jpg'
+    let ImageSource = 'https://www.filhao.com.br/noticia/adicionais/90-66-criando-arte-com-inteligencia-artificial-midjourney-e-outras.png'
 
     return(
         <>

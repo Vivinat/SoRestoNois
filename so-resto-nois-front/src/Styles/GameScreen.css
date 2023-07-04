@@ -1,10 +1,8 @@
 div{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: nowrap;
-    align-content: flex-start;
+    flex-direction: column;
 }
+
 section{
     border-style: solid;
     border: solid white 1px;
@@ -13,30 +11,34 @@ section{
 }
 
 section > img{
-    width: 250px;
+    width: 100%;
+}
+
+.GameArea{
+    display: flex;
+    flex-direction: row;
 }
 
 .GameText{
+    width: 300px;
     text-align: justify;
-    width: 250px;
-    height: 200px;
+    
 }
 
 .GameImage{
-
+    width: 300px;
+    display: flex;
     
 }
 
 .GameChoices{
-    width: 250px;
-    height: 150px;
+    width: 300px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+
 }
 
 .GameInformation{
-    width: 250px;
+
 }
