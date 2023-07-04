@@ -5,7 +5,7 @@ export default function GameImage() {
 
     return(
         <>
-            <section>
+            <section className="GameImage">
                 <img src = {ImageSource} alt="" />
             </section>
         </>

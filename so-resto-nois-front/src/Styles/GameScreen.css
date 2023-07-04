@@ -1,9 +1,42 @@
 div{
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-content: flex-start;
 }
 section{
     border-style: solid;
     border: solid white 1px;
     border-radius: 8px;
+    padding: 5px; 
 }
 
+section > img{
+    width: 250px;
+}
+
+.GameText{
+    text-align: justify;
+    width: 250px;
+    height: 200px;
+}
+
+.GameImage{
+
+    
+}
+
+.GameChoices{
+    width: 250px;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.GameInformation{
+    width: 250px;
+}

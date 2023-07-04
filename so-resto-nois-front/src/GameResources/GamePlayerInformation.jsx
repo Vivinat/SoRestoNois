@@ -3,7 +3,7 @@ export default function GamePlayerInformation() {
     
     return(
         <>
-            <section>
+            <section className="GameInformation">
                 <p>
                     número de balas: {balas}
                 </p>

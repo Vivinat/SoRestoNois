@@ -1,7 +1,7 @@
 export default function GameChoices() {
     return(
         <>
-            <section>
+            <section className="GameChoices">
                 <button>Escolha 1</button>
                 <button>Escolha 2</button>
                 <button>Escolha 3</button>
