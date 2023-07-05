@@ -1,6 +1,15 @@
+import { useEffect } from "react";
+import axios from "axios";
+
 export default function PlayerHealth() {
-    let currentHealth = 10;
-    let totalHealth = 10;
+    
+    useEffect(() => {
+        axios.get('http://localhost:3000/updateHealth')
+    }, []);
+
+
+    let currentHealth = 5;
+    let totalHealth = 5;
     
     return(
         <>
