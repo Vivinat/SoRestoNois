@@ -3,8 +3,14 @@ export default function PlayerHealth() {
     let totalHealth = 10;
     
     return(
-        <p>
-            Vida: {currentHealth} / {totalHealth}
-        </p>
+        <>
+        
+        <div class="health-bar" totalHealth = {totalHealth} currentHealth = {currentHealth}>
+            <div class="bar">
+                <div class="hit"></div>
+            </div>
+        </div>      
+        </>
+        
     )
 }
