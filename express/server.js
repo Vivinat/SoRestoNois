@@ -322,7 +322,7 @@ async function main(){
               if (choice.use_bullets == true)   //Essa escolha usa balas?
               {
                   console.log("Uso de balas detectado");
-                  let bullets = parseInt(choice.bullets_used);
+                  let bullets = parseInt(choice.bullets_used);  //NOME DO ATRIBUTO QUE DESCONTA
                   const canShoot = { value: true };
                   await checkAndUpdateBullets(client, userId, bullets, canShoot);
                   console.log(canShoot.value);
@@ -336,7 +336,7 @@ async function main(){
               if (choice.use_health == true)  //Essa escolha usa vida?
               {
                 console.log("Modificão de saúde detectada");
-                let health = parseInt(choice.health_used);
+                let health = parseInt(choice.health_used);  //NOME DO ATRIBUTO QUE DESCONTA
                 const isDead = { value: false};
                 await checkAndUpdateHealth(client, userId, health, isDead);
                 console.log(isDead.value);
@@ -350,7 +350,7 @@ async function main(){
               if (choice.has_achievement == true) //Essa escolha te dá uma conquista?
               {
                 console.log("Recebimento de conquista detectado");
-                await updateAchievements(client, userId, choice.achievement);
+                await updateAchievements(client, userId, choice.achievement); //NOME DO ATRIBUTO NO BD LINK
               }
               
               if (!choice) {

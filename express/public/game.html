@@ -49,18 +49,30 @@
               const choiceText = choiceTextData.choiceText;
               const choiceIds = choiceIdsData.choicesId;
               const choiceButtons = document.querySelectorAll('.choicesContainer button');
-
+              /*
               for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) {
                 choiceButtons[i].textContent = choiceText[i];
                 choiceButtons[i].setAttribute('choice-id', choiceIds[i]);
                 choiceButtons[i].addEventListener('click', function() {
                   sendChoice(choiceButtons[i].getAttribute('choice-id'));
                 });
+              } */
+              for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) { 
+                (function(index) {  //IIFF APLICAR NOS OUTROS FOR SE DER MERDA
+                  choiceButtons[index].textContent = choiceText[index];
+                  choiceButtons[index].setAttribute('choice-id', choiceIds[index]);
+                  choiceButtons[index].addEventListener('click', function() {
+                    sendChoice(choiceButtons[index].getAttribute('choice-id'));
+                  });
+                })(i);
               }
 
               // Esconda botões não usados
               for (let i = choiceText.length; i < choiceButtons.length; i++) {
-                choiceButtons[i].style.display = 'none';
+                (function(index) {
+                  choiceButtons[index].style.display = 'none';
+                  choiceButtons[index].setAttribute('choice-id', "");
+                })(i);
               }
             } else {
               console.error(`Failed to fetch choice text or choice IDs.`);
@@ -109,13 +121,30 @@
             const choiceButtons = document.querySelectorAll('.choicesContainer button');
 
             for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) {
-              choiceButtons[i].textContent = choiceText[i];
-              choiceButtons[i].setAttribute('choice-id', choiceIds[i]);
+              (function(index) {
+              choiceButtons[index].textContent = choiceText[i];
+              choiceButtons[index].style.display = 'block';
+              choiceButtons[index].setAttribute('choice-id', choiceIds[i]);
+              })(i);
+            }
+
+            for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) { 
+                (function(index) {  //IIFF APLICAR NOS OUTROS FOR SE DER MERDA
+                  choiceButtons[index].textContent = choiceText[index];
+                  choiceButtons[index].style.display = 'block';
+                  choiceButtons[index].setAttribute('choice-id', choiceIds[index]);
+                  choiceButtons[index].addEventListener('click', function() {
+                    sendChoice(choiceButtons[index].getAttribute('choice-id'));
+                  });
+                })(i);
             }
 
             for (let i = choiceText.length; i < choiceButtons.length; i++) {
-              choiceButtons[i].style.display = 'none';
-            }
+              (function(index){
+              choiceButtons[index].style.display = 'none';
+              choiceButtons[index].setAttribute('choice-id', "");
+            })(i);
+          }
           } else {
             console.error(`Failed to fetch narration text or choice data.`);
           }
