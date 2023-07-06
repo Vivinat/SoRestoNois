@@ -1,0 +1,50 @@
+div{
+    display: flex;
+    flex-direction: column;
+}
+
+section{
+    border-style: solid;
+    border: solid white 1px;
+    border-radius: 8px;
+    padding: 5px; 
+}
+
+section > img{
+    width: 100%;
+}
+
+.GameArea{
+    display: flex;
+    flex-direction: row;
+}
+
+.GameText{
+    width: 300px;
+    height: 600px;
+    text-align: justify;
+    
+}
+
+.GameImage{
+    width: 300px;
+    height: 600px;
+    display: flex;
+    
+}
+
+.GameChoices{
+    width: 300px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+}
+
+.GameInformation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
