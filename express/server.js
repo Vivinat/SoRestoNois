@@ -276,7 +276,7 @@ async function main(){
             }
           });
 
-          app.get('/updateHealth', async (req, res) => {   //Aqui verifica as balas
+          app.get('/updateHealth', async (req, res) => {   //Aqui verifica a vida
             const userId = req.cookies.userId;
             if (!userId) {
               res.sendStatus(401);
