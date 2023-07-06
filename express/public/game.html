@@ -9,7 +9,7 @@
 <body>
 
     <div class="narration">
-        <h1>Conexão do servidor Inativa. Sem narração para mostrar</h1>
+        
     </div>
 
 
@@ -23,8 +23,12 @@
     </div>
 
     <div class="bulletsCounter">
-      <p>Número de balas:<span id="UserBullets"></span></p>
+      <p>Número de balas: <span id="UserBullets"></span></p>
     </div>
+    <div class="healthCounter">
+      <p>Saúde: <span id="UserHealth"></span></p>
+    </div>
+    
 
     <script>
         window.addEventListener('load', async () => { //Sempre que houve carregamento, isso acontece:
@@ -46,17 +50,27 @@
               const choiceIds = choiceIdsData.choicesId;
               const choiceButtons = document.querySelectorAll('.choicesContainer button');
 
-              for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) {
-                choiceButtons[i].textContent = choiceText[i];
-                choiceButtons[i].setAttribute('choice-id', choiceIds[i]);
-                choiceButtons[i].addEventListener('click', function() {
-                  sendChoice(choiceButtons[i].getAttribute('choice-id'));
-                });
+              for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) { 
+                (function(index) {  //IIFF APLICAR NOS OUTROS FOR SE DER MERDA
+                  choiceButtons[index].textContent = choiceText[index];
+                  choiceButtons[index].setAttribute('choice-id', choiceIds[index]);
+                })(i);
               }
+
+              choiceButtons.forEach(button => {
+                button.removeEventListener('click', button.clickHandler); // Remover o listener existente
+                button.clickHandler = function() { // Armazenar a referência do novo listener
+                  sendChoice(button.getAttribute('choice-id'));
+                };
+                button.addEventListener('click', button.clickHandler);
+              });
 
               // Esconda botões não usados
               for (let i = choiceText.length; i < choiceButtons.length; i++) {
-                choiceButtons[i].style.display = 'none';
+                (function(index) {
+                  choiceButtons[index].style.display = 'none';
+                  choiceButtons[index].setAttribute('choice-id', "");
+                })(i);
               }
             } else {
               console.error(`Failed to fetch choice text or choice IDs.`);
@@ -65,6 +79,7 @@
             console.error(`Failed to fetch text: ${response.status} ${response.statusText}`);
           }
           updateBullets();
+          updateHealth();
         });
 
         //Cliquei num botão
@@ -103,22 +118,38 @@
             const choiceIds = choiceIdsData.choicesId;
             const choiceButtons = document.querySelectorAll('.choicesContainer button');
 
-            for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) {
-              choiceButtons[i].textContent = choiceText[i];
-              choiceButtons[i].setAttribute('choice-id', choiceIds[i]);
+            for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) { 
+                (function(index) {  //IIFF APLICAR NOS OUTROS FOR SE DER MERDA
+                  choiceButtons[index].textContent = choiceText[index];
+                  choiceButtons[index].style.display = 'block';
+                  choiceButtons[index].setAttribute('choice-id', choiceIds[index]);
+                })(i);
             }
 
+            choiceButtons.forEach(button => {
+              button.removeEventListener('click', button.clickHandler); // Remover o listener existente
+              button.clickHandler = function() { // Armazenar a referência do novo listener
+                sendChoice(button.getAttribute('choice-id'));
+              };
+              button.addEventListener('click', button.clickHandler);
+            });
+
+
             for (let i = choiceText.length; i < choiceButtons.length; i++) {
-              choiceButtons[i].style.display = 'none';
-            }
+              (function(index){
+              choiceButtons[index].style.display = 'none';
+              choiceButtons[index].setAttribute('choice-id', "");
+            })(i);
+          }
           } else {
             console.error(`Failed to fetch narration text or choice data.`);
           }
           updateBullets();
+          updateHealth();
         }
 
         function updateBullets() {    //Quantas balas eu tenho?
-          fetch('/consultaBullets')
+          fetch('/updateBullets')
             .then(function(response) {
               if (!response.ok) {
                 throw new Error('Ocorreu um erro ao consultar o banco de dados.');
@@ -128,6 +159,23 @@
             .then(function(data) {
               var atributo = parseInt(data.currentBullets); // O valor retornado é uma string
               document.getElementById('UserBullets').textContent = atributo; // Atualiza o conteúdo do elemento com o atributo
+            })
+            .catch(function(error) {
+              console.error(error);
+            });
+        };
+
+        function updateHealth(){
+          fetch('/updateHealth')
+            .then(function(response) {
+              if (!response.ok) {
+                throw new Error('Ocorreu um erro ao consultar o banco de dados.');
+              }
+              return response.json();
+            })
+            .then(function(data) {
+              var atributo = parseInt(data.currentHealth); // O valor retornado é uma string
+              document.getElementById('UserHealth').textContent = atributo; // Atualiza o conteúdo do elemento com o atributo
             })
             .catch(function(error) {
               console.error(error);
