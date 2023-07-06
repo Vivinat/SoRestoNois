@@ -1,11 +1,12 @@
 import GameChoice from "./GameChoice";
 export default function GameChoices() {
-    let numberOfChoices = 1;
+    let choicesText = ['escolha 1', 'escolha 2']
     let choices = []
 
-    for (let index = 0; index < numberOfChoices; index++) {
-        choices.push(<GameChoice/>);   
-    }
+    choicesText.forEach(element => {
+        choices.push(<GameChoice text = {element}/>); 
+    });
+
     return(
         <>
             <section className="GameChoices">
