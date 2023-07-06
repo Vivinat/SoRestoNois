@@ -49,23 +49,21 @@
               const choiceText = choiceTextData.choiceText;
               const choiceIds = choiceIdsData.choicesId;
               const choiceButtons = document.querySelectorAll('.choicesContainer button');
-              /*
-              for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) {
-                choiceButtons[i].textContent = choiceText[i];
-                choiceButtons[i].setAttribute('choice-id', choiceIds[i]);
-                choiceButtons[i].addEventListener('click', function() {
-                  sendChoice(choiceButtons[i].getAttribute('choice-id'));
-                });
-              } */
+
               for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) { 
                 (function(index) {  //IIFF APLICAR NOS OUTROS FOR SE DER MERDA
                   choiceButtons[index].textContent = choiceText[index];
                   choiceButtons[index].setAttribute('choice-id', choiceIds[index]);
-                  choiceButtons[index].addEventListener('click', function() {
-                    sendChoice(choiceButtons[index].getAttribute('choice-id'));
-                  });
                 })(i);
               }
+
+              choiceButtons.forEach(button => {
+                button.removeEventListener('click', button.clickHandler); // Remover o listener existente
+                button.clickHandler = function() { // Armazenar a referência do novo listener
+                  sendChoice(button.getAttribute('choice-id'));
+                };
+                button.addEventListener('click', button.clickHandler);
+              });
 
               // Esconda botões não usados
               for (let i = choiceText.length; i < choiceButtons.length; i++) {
@@ -120,24 +118,22 @@
             const choiceIds = choiceIdsData.choicesId;
             const choiceButtons = document.querySelectorAll('.choicesContainer button');
 
-            for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) {
-              (function(index) {
-              choiceButtons[index].textContent = choiceText[i];
-              choiceButtons[index].style.display = 'block';
-              choiceButtons[index].setAttribute('choice-id', choiceIds[i]);
-              })(i);
-            }
-
             for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) { 
                 (function(index) {  //IIFF APLICAR NOS OUTROS FOR SE DER MERDA
                   choiceButtons[index].textContent = choiceText[index];
                   choiceButtons[index].style.display = 'block';
                   choiceButtons[index].setAttribute('choice-id', choiceIds[index]);
-                  choiceButtons[index].addEventListener('click', function() {
-                    sendChoice(choiceButtons[index].getAttribute('choice-id'));
-                  });
                 })(i);
             }
+
+            choiceButtons.forEach(button => {
+              button.removeEventListener('click', button.clickHandler); // Remover o listener existente
+              button.clickHandler = function() { // Armazenar a referência do novo listener
+                sendChoice(button.getAttribute('choice-id'));
+              };
+              button.addEventListener('click', button.clickHandler);
+            });
+
 
             for (let i = choiceText.length; i < choiceButtons.length; i++) {
               (function(index){
