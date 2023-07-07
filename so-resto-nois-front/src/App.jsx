@@ -11,9 +11,6 @@ function App() {
 
   return (
     <>
-      {/*
-      <Register/>
-      */}
       <GameScreen/>
     </>
 
