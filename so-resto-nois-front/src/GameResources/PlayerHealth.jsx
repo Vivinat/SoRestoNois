@@ -1,10 +1,22 @@
 import { useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosHeaders } from "axios";
 
 export default function PlayerHealth() {
     
+    //const [currentHealth, setCurrentHealth] = useState(5);
+    //const [totalHealth, setTotalHealth] = useState(5);
+
+
     useEffect(() => {
-        axios.get('http://localhost:3000/updateHealth')
+        axios.get('http://localhost:3000/updateHealth', {
+            headers: {
+                withCredentials: true,
+                UserId:"64a77f8f0b0c2ea8528b480c",
+                'Access-Control-Allow-Origin': '*',
+                'Acess-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+            },
+        }
+        )
         .then((response) => {
             console.log(response.data);
         })
@@ -19,9 +31,9 @@ export default function PlayerHealth() {
     
     return(
         <>
-        <div class="health-bar" totalHealth = {totalHealth} currentHealth = {currentHealth}>
-            <div class="bar">
-                <div class="hit"></div>
+        <div className="health-bar" totalHealth = {totalHealth} currentHealth = {currentHealth}>
+            <div className="bar">
+                <div className="hit"></div>
             </div>
         </div>      
         </>
