@@ -22,8 +22,7 @@ export default function PlayerHealth() {
         });
     }, []);
 
-   //let currentHealth = 3;
-   //let totalHealth = 5;
+   //a barra de vida em css ainda não está funcionando, mas o código está aqui
 
     return(
         <>
@@ -34,8 +33,6 @@ export default function PlayerHealth() {
             </div>
         </div>      
         </>
-
-        // Agora falta adicionar uma função para receber atualizações do valor da vida do player
         
     )
 }
