@@ -6,7 +6,7 @@ import GameScreen from './GameScreen'
 import StartScreen from './StartScreen'
 import Register from './Register'
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+{/*import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const Router = createBrowserRouter([
   { path: '/',
@@ -19,7 +19,7 @@ const Router = createBrowserRouter([
     { path: '/Register',
     element: <Register />,}
   ] },
-]);
+]);*/}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

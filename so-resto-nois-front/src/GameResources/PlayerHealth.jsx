@@ -3,13 +3,14 @@ import axios, { AxiosHeaders } from "axios";
 
 export default function PlayerHealth() {
     
-    //const [currentHealth, setCurrentHealth] = useState(5);
-    //const [totalHealth, setTotalHealth] = useState(5);
+    const [currentHealth, setCurrentHealth] = useState(5);
+    const [totalHealth, setTotalHealth] = useState(5);
 
 
     useEffect(() => {
-        axios.get('http://localhost:3000/updateHealth')
+        axios.get('/api/updateHealth')
         .then((response) => {
+            setCurrentHealth(response.data.currentHealth);
             console.log(response.data);
         })
         .catch((error) => {
@@ -17,10 +18,8 @@ export default function PlayerHealth() {
         });
     }, []);
 
+   
 
-    let currentHealth = 5;
-    let totalHealth = 5;
-    
     return(
         <>
         <div className="health-bar" totalHealth = {totalHealth} currentHealth = {currentHealth}>

@@ -11,7 +11,7 @@ import { Outlet } from 'react-router-dom'
 function App() {
   const makeAPICall = async () => {
     try{
-      const response = await fetch('http://localhost:3000/updateHealth', {mode:'cors'});
+      const response = await fetch('/api/updateHealth', {mode:'cors'});
       const data = await response.json();
       console.log(data)
     }
@@ -24,11 +24,10 @@ function App() {
     makeAPICall()
   }, [])
 
-  const [count, setCount] = useState(0)
 
   return (
     <>
-    <StartScreen />
+    <GameScreen />
     </>
 
   )

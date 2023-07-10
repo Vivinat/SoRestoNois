@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());    //CookieParser vai armazenar cookie do usuário igual a _id no banco de dados
 app.use(bodyParser.json());
 app.use('/public', express.static(__dirname + '/public'));  //Diretorio onde estão os js e htmls restantes
-app.use(cors({origin: '*', credentials: false, allowedHeaders,}));   //Permite que o servidor receba requisições de qualquer origem
+//app.use(cors({origin: '*', credentials: false, allowedHeaders,}));   //Permite que o servidor receba requisições de qualquer origem
 app.use(function(req, res, next) {
   //res.header("Access-Control-Allow-Origin", "*");
   //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -37,7 +37,7 @@ async function main(){
         await client.connect();   //Conecta com o mongoDB
         console.log("Connected to MongoDB Atlas");
 
-        app.post('/register', async (req, res) => {   //Se NÃO houver nenhum cookie de id salvo no sistema, registra usuário
+        app.post('/api/register', async (req, res) => {   //Se NÃO houver nenhum cookie de id salvo no sistema, registra usuário
             const name = req.body.name; //Valores padrão
             const bullets = 0;
             const progression = 'N1A';
@@ -55,7 +55,7 @@ async function main(){
             }
         });
 
-        app.get('/', async (req, res) => {    //Raiz da aplicação. Verifica se tem cookie de _id salvo
+        app.get('/api/', async (req, res) => {    //Raiz da aplicação. Verifica se tem cookie de _id salvo
             const userId = req.cookies.userId;
             if (!userId) {    //Se não houver, mande o usuário se registrar
                 res.sendFile(__dirname + '/public/register.html');
@@ -125,7 +125,7 @@ async function main(){
         });
 
         
-        app.post('/resetUser', async (req,res) => { //Quero resetar meu jogo, mas não quero criar outra conta
+        app.post('/api/resetUser', async (req,res) => { //Quero resetar meu jogo, mas não quero criar outra conta
           const userId = req.cookies.userId;            
           if (!userId) {    //Se não acha o cookie, manda o cara se registrar
             res.sendFile(__dirname + '/public/register.html');
@@ -162,7 +162,7 @@ async function main(){
             }
       });
 
-        app.get('/text', async (req, res) => {    //Aqui ele pega a narração
+        app.get('/api/text', async (req, res) => {    //Aqui ele pega a narração
             const userId = req.cookies.userId;    //Identifica usuário
             if (!userId) {
               res.sendStatus(401);
@@ -201,7 +201,7 @@ async function main(){
             }
           });
 
-          app.get('/choiceText', async (req, res) => {    //Aqui ele pega as escolhas
+          app.get('/api/choiceText', async (req, res) => {    //Aqui ele pega as escolhas
             const userId = req.cookies.userId;    //Identifique o usuário
             if (!userId) {
               res.sendStatus(401);
@@ -236,7 +236,7 @@ async function main(){
             }
           });
 
-          app.get('/choiceIds', async (req, res) => {   //Preciso identificar agora qual é o ID dessas escolhas
+          app.get('/api/choiceIds', async (req, res) => {   //Preciso identificar agora qual é o ID dessas escolhas
             const userId = req.cookies.userId;    //Ache o usuário
             if (!userId) {
               res.sendStatus(401);
@@ -268,7 +268,7 @@ async function main(){
             });
 
 
-          app.get('/updateBullets', async (req, res) => {   //Aqui verifica as balas
+          app.get('/api/updateBullets', async (req, res) => {   //Aqui verifica as balas
             const userId = req.cookies.userId;
             if (!userId) {
               res.sendStatus(401);
@@ -290,7 +290,7 @@ async function main(){
             }
           });
 
-          app.get('/updateHealth', async (req, res) => {   //Aqui verifica a vida
+          app.get('/api/updateHealth', async (req, res) => {   //Aqui verifica a vida
             const userId = req.cookies.userId;
             if (!userId) {
               res.sendStatus(401);
@@ -313,7 +313,7 @@ async function main(){
           });
 
 
-          app.post('/makeChoice', async (req, res) => {   //Aqui acontece quando o usuário aperta um botão de escolha
+          app.post('/api/makeChoice', async (req, res) => {   //Aqui acontece quando o usuário aperta um botão de escolha
             const userId = req.cookies.userId;
             if (!userId) {
               res.sendStatus(401);
