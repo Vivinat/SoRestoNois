@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import axios, { AxiosHeaders } from "axios";
+import { useState } from "react";
 
 export default function PlayerHealth() {
-    
-    //const [currentHealth, setCurrentHealth] = useState([]);
-    //const [totalHealth, setTotalHealth] = useState([]);
+        
+    const [currentHealth, setCurrentHealth] = useState([]);
+    const [totalHealth, setTotalHealth] = useState([5]);
+
 
 
     
@@ -20,14 +22,15 @@ export default function PlayerHealth() {
         });
     }, []);
 
-   let currentHealth = 3;
-   let totalHealth = 5;
+   //let currentHealth = 3;
+   //let totalHealth = 5;
 
     return(
         <>
         <div className="health-bar" totalHealth = {totalHealth} currentHealth = {currentHealth}>
             <div className="bar">
                 <div className="hit"></div>
+                <p>Vida Atual: {currentHealth}/{totalHealth}</p>
             </div>
         </div>      
         </>
