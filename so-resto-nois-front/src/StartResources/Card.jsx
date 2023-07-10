@@ -3,9 +3,9 @@ import { Link, Navigate } from 'react-router-dom';
 
 export default function Card(props) {
 
-    async function novaConta() {
+    function novaConta() {
       console.log("teste")
-      return Navigate('/Register')
+      return <Navigate to='/Register'/>
     }
 
       return ( 
