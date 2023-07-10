@@ -6,13 +6,14 @@ import Game from './Game'
 import Register from './Register'
 import GameScreen from './GameScreen'
 import StartScreen from './StartScreen'
+import { Outlet } from 'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <StartScreen/>
+    <StartScreen />
     </>
 
   )

@@ -8,15 +8,7 @@ export default function PlayerHealth() {
 
 
     useEffect(() => {
-        axios.get('http://localhost:3000/updateHealth', {
-            headers: {
-                withCredentials: true,
-                UserId:"64a77f8f0b0c2ea8528b480c",
-                'Access-Control-Allow-Origin': '*',
-                'Acess-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-            },
-        }
-        )
+        axios.get('http://localhost:3000/updateHealth')
         .then((response) => {
             console.log(response.data);
         })

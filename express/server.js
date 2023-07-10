@@ -2,6 +2,7 @@ const {MongoClient} = require('mongodb');
 const express = require('express');
 const path = require('path');
 const {ObjectId} = require('mongodb');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
@@ -11,9 +12,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());    //CookieParser vai armazenar cookie do usuário igual a _id no banco de dados
 app.use(bodyParser.json());
 app.use('/public', express.static(__dirname + '/public'));  //Diretorio onde estão os js e htmls restantes
+app.use(cors({origin: '*', credentials: true, allowedHeaders,}));   //Permite que o servidor receba requisições de qualquer origem
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
+   
 
 const uri = "mongodb+srv://venat:N5qgMr2pkgT2HxMI@sorestonoiscluster.urpzo2g.mongodb.net/?retryWrites=true&w=majority";
 const port = process.env.PORT || 3000; // Usa a porta dinâmica do Heroku ou a porta 3000 se não estiver definida
+
+
+
 
 async function main(){
  
