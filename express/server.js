@@ -12,12 +12,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());    //CookieParser vai armazenar cookie do usuário igual a _id no banco de dados
 app.use(bodyParser.json());
 app.use('/public', express.static(__dirname + '/public'));  //Diretorio onde estão os js e htmls restantes
-app.use(cors({origin: '*', credentials: true, allowedHeaders,}));   //Permite que o servidor receba requisições de qualquer origem
+app.use(cors({origin: '*', credentials: false, allowedHeaders,}));   //Permite que o servidor receba requisições de qualquer origem
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  //res.header("Access-Control-Allow-Origin", "*");
+  //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+
 
    
 

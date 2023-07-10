@@ -20,7 +20,7 @@ export default function Card(props) {
           <h3 class="card__heading">Continuar</h3>
           </div>
           </a>
-          <a id="NewGameButton" class="card" href="#" onClick={novaConta}>
+          <a id="NewGameButton" class="card" href="" onClick={novaConta}>
           <div class="card__background" style={{backgroundImage: 'url(https://th.bing.com/th/id/OIG.ZC2UKESEk4WKqD4JqCT5?pid=ImgGn)'}}></div>
           <div class="card__content">
           <p class="card__category"></p>
