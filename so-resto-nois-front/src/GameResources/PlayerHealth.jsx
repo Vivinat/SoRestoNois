@@ -3,8 +3,8 @@ import axios, { AxiosHeaders } from "axios";
 
 export default function PlayerHealth() {
     
-    const [currentHealth, setCurrentHealth] = useState(5);
-    const [totalHealth, setTotalHealth] = useState(5);
+    const [currentHealth, setCurrentHealth] = useState([]);
+    const [totalHealth, setTotalHealth] = useState([]);
 
 
     useEffect(() => {
