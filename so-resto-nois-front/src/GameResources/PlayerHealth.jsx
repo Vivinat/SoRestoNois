@@ -1,44 +1,38 @@
 import { useEffect } from "react";
 import axios, { AxiosHeaders } from "axios";
+import { useState } from "react";
 
 export default function PlayerHealth() {
-    
-    //const [currentHealth, setCurrentHealth] = useState(5);
-    //const [totalHealth, setTotalHealth] = useState(5);
+        
+    const [currentHealth, setCurrentHealth] = useState([]);
+    const [totalHealth, setTotalHealth] = useState([5]);
 
+
+
+    
 
     useEffect(() => {
-        axios.get('http://localhost:3000/updateHealth', {
-            headers: {
-                withCredentials: true,
-                UserId:"64a77f8f0b0c2ea8528b480c",
-                'Access-Control-Allow-Origin': '*',
-                'Acess-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-            },
-        }
-        )
+        axios.get('/api/updateHealth')
         .then((response) => {
-            console.log(response.data);
+            setCurrentHealth(response.data.currentHealth);
+            console.log(response.data.currentHealth);
         })
         .catch((error) => {
             console.log(error);
         });
     }, []);
 
+   //a barra de vida em css ainda não está funcionando, mas o código está aqui
 
-    let currentHealth = 5;
-    let totalHealth = 5;
-    
     return(
         <>
         <div className="health-bar" totalHealth = {totalHealth} currentHealth = {currentHealth}>
             <div className="bar">
                 <div className="hit"></div>
+                <p>Vida Atual: {currentHealth}/{totalHealth}</p>
             </div>
         </div>      
         </>
-
-        // Agora falta adicionar uma função para receber atualizações do valor da vida do player
         
     )
 }

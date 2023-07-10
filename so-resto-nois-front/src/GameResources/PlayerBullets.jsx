@@ -1,5 +1,20 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 export default function PlayerBullets() {
-    let balas = 0;
+    const [balas, setBalas] = useState([]);
+
+    useEffect(() => {
+        axios.get('/api/updateBullets')
+        .then((response) => {
+            setBalas(response.data.currentBullets);
+            console.log(response.data.currentBullets);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }, []);
+
     
     return(
         <p>
