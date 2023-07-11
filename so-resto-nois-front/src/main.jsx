@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   element: <App />,
   children: [
     { path: '/',
-    element: <StartScreen />,},
+    element: <GameScreen />,},
   ] },
   { path: '/Register',
   element: <Register /> },

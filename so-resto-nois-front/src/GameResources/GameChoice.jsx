@@ -1,5 +1,5 @@
-export default function GameChoice() {
-    let ChoiceText = 'o Mofo...'
+export default function GameChoice(props) {
+    let ChoiceText = props.escolhas;
     return(
         <button>{ChoiceText}</button>
     )

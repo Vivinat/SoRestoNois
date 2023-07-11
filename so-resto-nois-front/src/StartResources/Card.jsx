@@ -9,7 +9,7 @@ export default function Card(props) {
     const [userId, setUserId] = useState([]);
 
     function resetUser(){
-      axios('/api/resetUser', { method: 'POST' })
+      axios.post('/api/resetUser')
         .then(response => {
           if (response.ok) {
             window.location.href = '/api/';
