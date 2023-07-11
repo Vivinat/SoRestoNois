@@ -2,7 +2,7 @@ export default function Forms() {
     return (
     <>
     <h1>Cadastro de usuário</h1>
-    <form action="http://localhost:3000/register" method="POST">
+    <form action="/api/register" method="POST">
         <label> Nome:
             <input type="text" name="name" id="name-input"/>
         </label>

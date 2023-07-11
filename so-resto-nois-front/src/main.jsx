@@ -6,23 +6,26 @@ import GameScreen from './GameScreen'
 import StartScreen from './StartScreen'
 import Register from './Register'
 
-{/*import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-const Router = createBrowserRouter([
+
+
+
+const router = createBrowserRouter([
   { path: '/',
   element: <App />,
   children: [
-    { path: '/StartScreen',
+    { path: '/',
     element: <StartScreen />,},
-    { path: '/GameScreen',
-    element: <GameScreen />,},
-    { path: '/Register',
-    element: <Register />,}
   ] },
-]);*/}
+  { path: '/Register',
+  element: <Register /> },
+  { path: '/GameScreen',
+  element: <GameScreen /> },
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>,
 )
