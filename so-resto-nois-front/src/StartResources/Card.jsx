@@ -9,42 +9,17 @@ export default function Card(props) {
     const [userId, setUserId] = useState([]);
 
     function resetUser(){
-        axios.post('/api/resetUser', async (req, res) => {
-          setUserId(req.cookies.userId);            
-          if (!userId) {    //Se não acha o cookie, manda o cara se registrar
-            return <Navigate to="/Register" />;
+      axios('/api/resetUser', { method: 'POST' })
+        .then(response => {
+          if (response.ok) {
+            window.location.href = '/api/';
+          } else {
+            throw new Error('Ocorreu um erro ao consultar o banco de dados.');
           }
-          try{
-            setUser(await findUser(client, userId));  //Ache o usuário
-            if (!user) {  //Se não tiver achado, de este erro
-              res.sendStatus(404);
-              return;
-            }
-
-            
-            const [filter, setFilter] = useState({ _id: new ObjectId(userId)});  //Vamos preparar para fazer o update
-            const [bullets, setBullets] = useState([0]);
-            const [progression, setProgression] = useState(['N1A']);
-            const [health, setHealth] = useState([5]);
-
-            const update = { $set: { 
-              starterProgression: progression , 
-              starterBullets: bullets,
-              health: health} };
-
-            const result = await client.db("PlayerStats").collection("_stats").updateOne(filter, update);
-            if (result.modifiedCount === 0) {
-              console.error(`Failed to update user ${userId}`);
-              res.sendStatus(500);
-              return;
-            }
-            console.log(`${userId} resetado com sucesso`);
-            res.redirect('/api/');
-            } catch (error) {
-              console.error(error);
-              res.sendStatus(500);
-            }
-      });
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
 
     function novaConta (){
