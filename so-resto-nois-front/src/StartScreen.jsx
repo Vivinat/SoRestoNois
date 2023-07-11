@@ -27,7 +27,7 @@ export default function StartScreen() {
             console.log(response.data[0].status);
             if(status.includes('Sem cookie de usuário')) {
                 //navigator.push(<Navigate to="/Register" />);
-                return <Navigate to="Register" />  
+                return <Navigate to="/Register" />  
             }
             else{
             setnewName(response.data[0].newName);

@@ -94,6 +94,7 @@ async function main(){
 
                 } else {    //Se usuário quiser, ele pode iniciar um novo jogo
                     res.clearCookie('userId');
+                    res.json([{"status": "iniciar novo jogo"}])
                     res.sendFile(__dirname + '/public/register.html');
                 }
                 
