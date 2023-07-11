@@ -22,30 +22,27 @@ export default function Card(props) {
         });
     }
 
-    function novaConta (){
-      console.log("Nova conta");
-      return <Navigate to="Register" />;
-    }
+
 
       return ( 
       <>
       
 <section className="hero-section">
           <div className="card-grid">
-          <a id="LogButton" class="card" href="#Game">
+          <Link to="GameScreen" id="LogButton" class="card">
           <div class="card__background" style={{backgroundImage: 'url(https://th.bing.com/th/id/OIG.5.g33uZBDYO4GlissDWY?pid=ImgGn)'}}></div>
           <div class="card__content">
           <p class="card__category"></p>
           <h3 class="card__heading">Continuar</h3>
           </div>
-          </a>
-          <a id="NewGameButton" class="card" href="#" onClick={() => novaConta()}>
+          </Link>
+          <Link to="Register" id="NewGameButton" class="card">
           <div class="card__background" style={{backgroundImage: 'url(https://th.bing.com/th/id/OIG.ZC2UKESEk4WKqD4JqCT5?pid=ImgGn)'}}></div>
           <div class="card__content">
           <p class="card__category"></p>
           <h3 class="card__heading">Nova Conta</h3>
           </div>
-          </a>
+          </Link>
           <a id="New" class="card" href="#" onClick={() => resetUser()}>
           <div class="card__background" style={{backgroundImage: 'url(https://th.bing.com/th/id/OIG.ZC2UKESEk4WKqD4JqCT5?pid=ImgGn)'}}></div>
           <div class="card__content">

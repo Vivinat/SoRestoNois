@@ -18,7 +18,7 @@ export default function PlayerBullets() {
     
     return(
         <p>
-            numero de balas: {balas}
+            Número de balas: {balas}
         </p>
     )
 }

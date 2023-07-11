@@ -4,10 +4,11 @@ import "./Styles/Card.css";
 import { useEffect } from "react";
 import Register from "./Register";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 export default function StartScreen() {
 
-
+    const [status, setStatus] = useState([]); 
     const [newName, setnewName] = useState([]);
     const [starterProgression, setStarterProgression] = useState([]);
     const [starterBullets, setStarterBullets] = useState([]);
@@ -22,6 +23,13 @@ export default function StartScreen() {
     function getnewName() {
         axios.get('/api/')
         .then((response) => {
+            setStatus(response.data[0].status);
+            console.log(response.data[0].status);
+            if(status.includes('Sem cookie de usuário')) {
+                //navigator.push(<Navigate to="/Register" />);
+                return <Navigate to="Register" />  
+            }
+            else{
             setnewName(response.data[0].newName);
             setStarterProgression(response.data[0].starterProgression);
             setStarterBullets(response.data[0].starterBullets);
@@ -30,7 +38,9 @@ export default function StartScreen() {
             setAchievementsList(response.data[0].achievementsList);
 
 
-            console.log(response.data[0].newName);
+            console.log(response.data);
+            }
+            
         })
         .catch((error) => {
             console.log(error);

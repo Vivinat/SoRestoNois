@@ -1,4 +1,7 @@
 export default function Forms() {
+
+
+
     return (
     <>
     <h1>Cadastro de usuário</h1>

@@ -58,7 +58,8 @@ async function main(){
         app.get('/api/', async (req, res) => {    //Raiz da aplicação. Verifica se tem cookie de _id salvo
             const userId = req.cookies.userId;
             if (!userId) {    //Se não houver, mande o usuário se registrar
-                res.sendFile(__dirname + '/public/register.html');
+                //res.sendFile(__dirname + '/public/register.html');
+                res.json([{"status": "Sem cookie de usuário"}])
                 return;
             }
 
@@ -76,7 +77,8 @@ async function main(){
                 if (user) {   //Se achar usuário, crie esta página dinamica com as infos do usuário
                     res.json(
                        [
-                      {"id" : user.id,
+                      {"status": "Cookie de usuário encontrado",
+                      "id" : user.id,
                       "name": user.name,
                       "newName": user.newName,
                       "starterProgression": user.starterProgression,

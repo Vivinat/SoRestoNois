@@ -1,6 +1,10 @@
+import React, { useState } from 'react';
+
 export default function GameChoice(props) {
-    let ChoiceText = props.escolhas;
+    
+    const [ChoiceText, setChoiceText] = useState(props.escolhas);
+    //let ChoiceText = props.escolhas;
     return(
-        <button>{ChoiceText}</button>
+        {ChoiceText}
     )
 }

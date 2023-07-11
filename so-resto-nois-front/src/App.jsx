@@ -11,19 +11,11 @@ import axios from 'axios'
 
 function App() {
 
-  useEffect(() => {
-    axios.get('/api/', async (req, res) => {
-      const userId = req.cookies.userId;
-      if (!userId){
-        return <Navigate to="Register" />
-      }
-    })
-  }, [])
+
 
   return (
     <>
-    
-    <Outlet />
+      <StartScreen />
     </>
 
   )
