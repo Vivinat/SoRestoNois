@@ -25,11 +25,6 @@ export default function StartScreen() {
         .then((response) => {
             setStatus(response.data[0].status);
             console.log(response.data[0].status);
-            if(status.includes('Sem cookie de usuário')) {
-                //navigator.push(<Navigate to="/Register" />);
-                return <Navigate to="/Register" />  
-            }
-            else{
             setnewName(response.data[0].newName);
             setStarterProgression(response.data[0].starterProgression);
             setStarterBullets(response.data[0].starterBullets);
@@ -41,15 +36,26 @@ export default function StartScreen() {
             console.log(response.data);
             }
             
-        })
+        )
         .catch((error) => {
             console.log(error);
         });
     }
-    
 
-    return(
-        <>
+
+    if(status.includes('Sem cookie de usuário')) {
+          return telaRegistro();
+    }
+    else {
+        return telaInicial();
+    }
+
+    function telaRegistro(){
+        return <Register />
+    }
+
+    function telaInicial(){
+        return <>
         <h1>Bem vindo, {newName}</h1>
         <p>Progresso: {starterProgression}</p>
         <p>Balas: {starterBullets}</p>
@@ -60,6 +66,13 @@ export default function StartScreen() {
         <ul>
             {achievementsList}
         </ul>
+        </>
+    }
+    
+
+    return(
+        <>
+        
         </>
     )
 }
