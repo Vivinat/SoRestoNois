@@ -58,8 +58,7 @@ async function main(){
         app.get('/api/', async (req, res) => {    //Raiz da aplicação. Verifica se tem cookie de _id salvo
             const userId = req.cookies.userId;
             if (!userId) {    //Se não houver, mande o usuário se registrar
-                //res.sendFile(__dirname + '/public/register.html');
-                res.json([{"status": "Sem cookie de usuário"}])
+                res.sendFile(__dirname + '/public/register.html');
                 return;
             }
 
@@ -75,26 +74,47 @@ async function main(){
               }
 
                 if (user) {   //Se achar usuário, crie esta página dinamica com as infos do usuário
-                    res.json(
-                       [
-                      {"status": "Cookie de usuário encontrado",
-                      "id" : user.id,
-                      "name": user.name,
-                      "newName": user.newName,
-                      "starterProgression": user.starterProgression,
-                      "starterBullets": user.starterBullets,
-                      "health": user.health,
-                      "achievements_length": user.achievements.length,
-                      "achievementsList": achievementsList},
-                    ]
-                    
-                    
-  
-                    );
+                    res.send(`
+                    <html>
+                    <head>
+                      <title>Bem-vindo, ${user.newName}!</title>
+                      <link rel="stylesheet" href="/public/style.css">
+                    </head>
+                    <body>
+                      <h1>Bem-vindo, ${user.newName}!</h1>
+                      <p>Progresso: ${user.starterProgression}</p>
+                      <p>Balas: ${user.starterBullets}</p>
+                      <p>Saúde: ${user.health}</p>
+                      <button id="LogButton"><a href="/public/game.html">Continuar</a></button>
+                      <button id="NewAccountButton"><a href="/public/register.html">Nova Conta</a></button>
+                      <button id="NewGameButton"><a href="#" onclick="resetUser()">Novo Jogo</a></button>
+                      <hr>
+                      <p>Conquistas</p>
+                      <p>${user.achievements.length} de 30</p>
+                      <ul>
+                        ${achievementsList} <!-- Insira a lista de conquistas aqui -->
+                      </ul>
+                    </body>
+                    <script>
+                          function resetUser() {
+                            fetch('/resetUser', { method: 'POST' })
+                              .then(response => {
+                                if (response.ok) {
+                                  window.location.href = '/';
+                                } else {
+                                  throw new Error('Ocorreu um erro ao consultar o banco de dados.');
+                                }
+                              })
+                              .catch(error => {
+                                console.error(error);
+                              });
+                          }
+                    </script>
+                    </html>
+                    `);
 
                 } else {    //Se usuário quiser, ele pode iniciar um novo jogo
                     res.clearCookie('userId');
-                    res.json([{"status": "iniciar novo jogo"}])
                     res.sendFile(__dirname + '/public/register.html');
                 }
                 
