@@ -79,9 +79,9 @@ async function main(){
                         </section>
 
                         <section class = "userOptions">
-                          <button id="LogButton"><a href="/public/game.html">Continuar</a></button>
-                          <button id="NewAccountButton"><a href="/public/register.html">Nova Conta</a></button>
-                          <button id="NewGameButton"><a href="#" onclick="resetUser()">Novo Jogo</a></button>
+                          <a href="/public/game.html"><button id="LogButton">Continuar</button></a>
+                          <a href="#" onclick="resetUser()"><button id="NewGameButton">Novo Jogo</button></a>
+                          <a href="/public/register.html"><button id="NewAccountButton">Nova Conta</button></a>
                         </section>
 
                         
@@ -92,7 +92,7 @@ async function main(){
                           
                             ${achievementsList} <!-- Insira a lista de conquistas aqui -->
                           
-                        </section>
+                      </section>
                     </body>
                     <script>
                           function resetUser() {
