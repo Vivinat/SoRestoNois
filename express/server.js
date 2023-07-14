@@ -56,7 +56,7 @@ async function main(){
                   // Crie uma string com os itens da lista de conquistas
                   achievementsList = achievements
                   .map(achievement => `<img src="${achievement}" alt="Achievement">`)
-                  .join('');  //QUEM FOR FAZER O CSS ACHA UM JEITO DE TIRAR O • DO <li>
+                  .join('');  
               }
 
                 if (user) {   //Se achar usuário, crie esta página dinamica com as infos do usuário
@@ -88,7 +88,7 @@ async function main(){
                       </main>
                       <section class = "userAchievements">
                           <p>Conquistas</p>
-                          <p>${user.achievements.length} de 30</p>
+                          <p>${user.achievements.length} de 14</p>
                           
                             ${achievementsList} <!-- Insira a lista de conquistas aqui -->
                           

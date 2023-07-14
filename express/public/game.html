@@ -23,8 +23,8 @@
   
         <section class="GameChoices">
           <div class="choicesContainer">
-  
-            <button id="choice1" choice-id=""></button>   <!-- choice-id recebe a Id da escolha atrelada a ele, em tempo de execução -->
+  <!-- choice-id recebe a Id da escolha atrelada a ele, em tempo de execução -->
+            <button id="choice1" choice-id=""></button>   
             <button id="choice2" choice-id=""></button>
             <button id="choice3" choice-id=""></button>
             <button id="choice4" choice-id=""></button>
@@ -71,7 +71,7 @@
               const choiceButtons = document.querySelectorAll('.choicesContainer button');
 
               for (let i = 0; i < choiceText.length && i < choiceButtons.length; i++) { 
-                (function(index) {  //IIFF APLICAR NOS OUTROS FOR SE DER MERDA
+                (function(index) {  
                   choiceButtons[index].textContent = choiceText[index];
                   choiceButtons[index].setAttribute('choice-id', choiceIds[index]);
                 })(i);
