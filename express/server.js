@@ -423,6 +423,11 @@ async function findUser(client, userId) {
 async function updateAchievements(client, userId, achievement)
 {
   const user = await findUser(client, userId);
+
+  if (user.achievements.includes(achievement)) {
+    console.log('O jogador já possui essa conquista. Abordando update.');
+    return;
+  }
   user.achievements.push(achievement);
   try{
     const filter = { _id: new ObjectId(userId)};
