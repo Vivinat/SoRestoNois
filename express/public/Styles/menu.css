@@ -45,7 +45,6 @@ button:focus, button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
 }
 
-
 body {
     margin: 0;
     display: flex;
@@ -64,42 +63,34 @@ section{
     padding: 10px; 
 }
 
-section > img{
-    width: 100%;
-}
-
-.GameArea{
+.userInformation{
+    width: 300px;
+    height: 250px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
 }
 
-.GameText{
+.userOptions{
     width: 300px;
-    height: 600px;
-    text-align: left;
-    overflow: hidden;
-    overflow-y: scroll;
-}
-
-.GameImage{
-    width: 300px;
-    height: 600px;
-    display: flex;
-    
-}
-
-.GameChoices > div{
-    width: 300px;
-    height: 600px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
 }
 
-.GameInformation{
+.userAchievements{
+    width: 620px;
+    height: 520px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
     align-items: center;
+    justify-content: space-evenly;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.userAchievements > img{
+    width: 200px;
 }

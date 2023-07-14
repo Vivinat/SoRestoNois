@@ -55,7 +55,7 @@ async function main(){
                   const achievements = user.achievements; // Obtenha o array de conquistas
                   // Crie uma string com os itens da lista de conquistas
                   achievementsList = achievements
-                  .map(achievement => `<li><img src="${achievement}" alt="Achievement"></li>`)
+                  .map(achievement => `<img src="${achievement}" alt="Achievement">`)
                   .join('');  //QUEM FOR FAZER O CSS ACHA UM JEITO DE TIRAR O • DO <li>
               }
 
@@ -64,22 +64,35 @@ async function main(){
                     <html>
                     <head>
                       <title>Bem-vindo, ${user.newName}!</title>
-                      <link rel="stylesheet" href="/public/style.css">
+                      <link rel="preconnect" href="https://fonts.googleapis.com">
+                      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                      <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+                      <link rel="stylesheet" href="public/Styles/menu.css">
                     </head>
                     <body>
-                      <h1>Bem-vindo, ${user.newName}!</h1>
-                      <p>Progresso: ${user.starterProgression}</p>
-                      <p>Balas: ${user.starterBullets}</p>
-                      <p>Saúde: ${user.health}</p>
-                      <button id="LogButton"><a href="/public/game.html">Continuar</a></button>
-                      <button id="NewAccountButton"><a href="/public/register.html">Nova Conta</a></button>
-                      <button id="NewGameButton"><a href="#" onclick="resetUser()">Novo Jogo</a></button>
-                      <hr>
-                      <p>Conquistas</p>
-                      <p>${user.achievements.length} de 30</p>
-                      <ul>
-                        ${achievementsList} <!-- Insira a lista de conquistas aqui -->
-                      </ul>
+                      <main>
+                        <section class = "userInformation">
+                          <h1>Bem-vindo, ${user.newName}!</h1>
+                          <p>Progresso: ${user.starterProgression}</p>
+                          <p>Balas: ${user.starterBullets}</p>
+                          <p>Saúde: ${user.health}</p>
+                        </section>
+
+                        <section class = "userOptions">
+                          <button id="LogButton"><a href="/public/game.html">Continuar</a></button>
+                          <button id="NewAccountButton"><a href="/public/register.html">Nova Conta</a></button>
+                          <button id="NewGameButton"><a href="#" onclick="resetUser()">Novo Jogo</a></button>
+                        </section>
+
+                        
+                      </main>
+                      <section class = "userAchievements">
+                          <p>Conquistas</p>
+                          <p>${user.achievements.length} de 30</p>
+                          
+                            ${achievementsList} <!-- Insira a lista de conquistas aqui -->
+                          
+                        </section>
                     </body>
                     <script>
                           function resetUser() {

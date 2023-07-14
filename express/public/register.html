@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Styles/register.css">
+
     <script src="/public/client.js"></script>
     <title>Registre-se! Só Resto Nois</title>
 </head>
 <body>
 
-    <h1>Cadastro de usuário</h1>
+    <main>
+      <h1>Cadastro de usuário</h1>
 
-    <form action="/register" method="POST"> 
-      <label>
-          Nome:
-          <input type="text" name="name" id="name-input">
-      </label>
-      <button type="submit">Enviar</button>
-    </form>
-
-
-  <footer><p>Utilizamos cookies para facilitar o armazenamento!</p></footer>
+      <form action="/register" method="POST"> 
+        <label>
+            Nome:
+            <input type="text" name="name" id="name-input">
+        </label>
+        <button type="submit">Enviar</button>
+      </form>
+      <p>Utilizamos cookies para facilitar o armazenamento!</p>
+    </main>
 
 </body>
 </html>
