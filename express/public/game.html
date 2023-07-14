@@ -4,30 +4,46 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Styles/game.css">
     <title>Só Resto Nois</title>
 </head>
 <body>
 
-    <div class="narration">
-        
-    </div>
-
-
-    <div class="choicesContainer">
-
-      <button id="choice1" choice-id=""></button>   <!-- choice-id recebe a Id da escolha atrelada a ele, em tempo de execução -->
-      <button id="choice2" choice-id=""></button>
-      <button id="choice3" choice-id=""></button>
-      <button id="choice4" choice-id=""></button>
+    <main>
+      <div class="GameArea">
+        <section class="GameText">
+          <div class="narration">
+          
+          </div>
+        </section>
   
-    </div>
+        <section class="GameChoices">
+          <div class="choicesContainer">
+  
+            <button id="choice1" choice-id=""></button>   <!-- choice-id recebe a Id da escolha atrelada a ele, em tempo de execução -->
+            <button id="choice2" choice-id=""></button>
+            <button id="choice3" choice-id=""></button>
+            <button id="choice4" choice-id=""></button>
+        
+          </div>
+        </section>
+  
+        <section class="GameInformation">
+          <div class="bulletsCounter">
+            <p>Número de balas: <span id="UserBullets"></span></p>
+          </div>
+          <div class="healthCounter">
+            <p>Saúde: <span id="UserHealth"></span></p>
+          </div>
+        </section>
+      </div>
+    </main>
 
-    <div class="bulletsCounter">
-      <p>Número de balas: <span id="UserBullets"></span></p>
-    </div>
-    <div class="healthCounter">
-      <p>Saúde: <span id="UserHealth"></span></p>
-    </div>
+
+    
+
+    
+    
     
 
     <script>
@@ -37,7 +53,7 @@
             const data = await response.json();
             const text = data.text;
             const narration = document.querySelector('.narration');
-            narration.innerHTML = `<h1>${text}</h1>`;   //Substitua pela narração obtida
+            narration.innerHTML = `<p>${text}<p>`;   //Substitua pela narração obtida
 
             // Popule os botões de escolhas com textos e Ids
             const choiceTextResponse = await fetch('/choiceText');
@@ -112,7 +128,7 @@
 
             const text = narrationData.text;
             const narration = document.querySelector('.narration');
-            narration.innerHTML = `<h1>${text}</h1>`;
+            narration.innerHTML = `<p>${text}</p>`;
 
             const choiceText = choiceTextData.choiceText;
             const choiceIds = choiceIdsData.choicesId;
