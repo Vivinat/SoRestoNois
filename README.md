@@ -7,7 +7,22 @@ O jogo é fortemente inspirado (E até pode ser tratada como uma paródia) do jo
 
 # 🐱‍💻 Instalação
 
+Para executar o jogo, é necessário uma versão de Node(16x) em seu computador e do NPM (Node Package Manager). Após se certificar de que a possui, realize o clone ou download dos arquivos da branch main. Use os seguintes comandos para iniciar a conexão com o servidor:
 
+1. Abra o terminal/prompt de comando e use cd + rota do arquivo em seu computador. A rota deve parar na pasta express, e deve ser possível visualizar o arquivo server.js. Exemplo: "C:\Users\Particular\Documents\GitHub\SoRestoNois\express"
+2. As depêndencias necessárias para executar o sistema devem ser instaladas. Para isso, use:
+````
+npm install
+````
+3. Após o download bem sucedido, ainda estando dentro da pasta pelo terminal/prompt, digite:
+````
+node server.js
+````
+4. Uma mensagem informará que o servidor está aberto e executando na porta 3000. 
+5. No navegador de sua escolha, insira o seguinte endereço: http://localhost:3000/ 
+6. Boa jogatina!
+
+Lembre-se de que se fechar o terminal, a comunicação com o banco de dados estará perdida e não será possível continuar jogando. Os passos acima devem ser realizados (Com exceção do passo 2) sempre que desejar executar o jogo.
 
 # 👾 Sobre o Jogo
 
@@ -69,12 +84,6 @@ Por meio do HTML, os dados são dispostos na tela e estilizados com o CSS, dando
 </p>
 
 <hr>
-
-<p align="center" width="100%">
-  <kbd>
-    <img width="100%" src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white">
-  </kbd>
-</p>
 
 
 #  Autores
