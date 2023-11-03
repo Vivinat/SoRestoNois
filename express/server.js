@@ -12,7 +12,7 @@ app.use(cookieParser());    //CookieParser vai armazenar cookie do usuário igua
 app.use(bodyParser.json());
 app.use('/public', express.static(__dirname + '/public'));  //Diretorio onde estão os js e htmls restantes
 
-const uri = "mongodb+srv://venat:N5qgMr2pkgT2HxMI@sorestonoiscluster.urpzo2g.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://venat:ENDEREÇOREMOVIDOPORSEGURANÇA@sorestonoiscluster.urpzo2g.mongodb.net/?retryWrites=true&w=majority";
 const port = process.env.PORT || 3000; // Usa a porta dinâmica do Heroku ou a porta 3000 se não estiver definida
 
 async function main(){
